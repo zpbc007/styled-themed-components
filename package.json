@@ -1,0 +1,63 @@
+{
+  "name": "@hinata_hyuga/styled-themed-components",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "repository": "https://github.com/zpbc007/styled-themed-components.git",
+  "author": "zhaopeng <719197352@qq.com>",
+  "license": "MIT",
+  "scripts": {
+    "clean:dist": "rimraf dist/*",
+    "min": "terser dist/index.js -o dist/index.min.js",
+    "build": "npm run clean:dist && cp ./ResizeObserver.d.ts ./dist && rollup -c && npm run min",
+    "format": "prettier --write \"src/**/*.{js,ts,tsx}\"",
+    "lint:fix": "tslint -c tslint.json \"src/**/*.{ts,tsx}\" --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "index.tsx": [
+      "yarn format",
+      "yarn lint:fix",
+      "git add ."
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^7.5.2",
+    "@commitlint/config-conventional": "^7.5.0",
+    "@types/react": "^16.8.13",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.5",
+    "prettier": "^1.17.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.10.0",
+    "rollup-plugin-typescript2": "^0.20.1",
+    "styled-components": "^4.2.0",
+    "terser": "^3.17.0",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.16.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "tslint-react": "^4.0.0",
+    "tslint-react-hooks": "^2.0.0",
+    "typescript": "^3.4.3"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "styled-components": "^4.2.0"
+  }
+}
